@@ -1,0 +1,9 @@
+### IDE FILES ###
+.idea/
+
+### OUTPUT ###
+dist/
+
+### NODE ###
+node_modules/
+*.log
