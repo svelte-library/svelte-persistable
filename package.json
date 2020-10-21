@@ -11,7 +11,7 @@
     "build": "rollup -c",
     "dev": "rollup -c -w",
     "validate": "svelte-check",
-    "prepublishOnly": "npm run build"
+    "prepublishOnly": "yarn build"
   },
   "files": [
     "src",
