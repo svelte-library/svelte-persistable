@@ -1,13 +1,13 @@
 {
   "name": "@svelte-library/svelte-persistable",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "main": "dist/index.js",
-  "module": "dist/index.mjs",
+  "svelte": "src/index.ts",
   "repository": "git@github.com:svelte-library/svelte-persistable.git",
   "author": "Thomas Biesaart <thomas@infi.nl>",
   "license": "MIT",
   "scripts": {
-    "build": "tsc --outDir dist --declaration true && rollup -c",
+    "build": "tsc --outDir dist --declaration true && cp src/*.svelte dist/",
     "dev": "rollup -c -w",
     "validate": "svelte-check",
     "prepublishOnly": "yarn build"
