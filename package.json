@@ -1,6 +1,6 @@
 {
   "name": "@svelte-library/svelte-persistable",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "main": "dist/index.js",
   "module": "dist/index.mjs",
   "svelte": "src/index.ts",
@@ -8,7 +8,7 @@
   "author": "Thomas Biesaart <thomas@infi.nl>",
   "license": "MIT",
   "scripts": {
-    "build": "rollup -c",
+    "build": "tsc --outDir dist --declaration true && rollup -c",
     "dev": "rollup -c -w",
     "validate": "svelte-check",
     "prepublishOnly": "yarn build"
@@ -17,6 +17,9 @@
     "src",
     "dist"
   ],
+  "peerDependencies": {
+    "svelte": "^3.29.0"
+  },
   "devDependencies": {
     "@rollup/plugin-node-resolve": "^9.0.0",
     "@rollup/plugin-typescript": "^6.0.0",
