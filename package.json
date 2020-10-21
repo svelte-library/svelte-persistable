@@ -1,8 +1,7 @@
 {
   "name": "@svelte-library/svelte-persistable",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "main": "dist/index.js",
-  "svelte": "src/index.ts",
   "repository": "git@github.com:svelte-library/svelte-persistable.git",
   "author": "Thomas Biesaart <thomas@infi.nl>",
   "license": "MIT",
