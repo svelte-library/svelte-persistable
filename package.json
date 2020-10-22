@@ -1,38 +1,72 @@
 {
   "name": "@svelte-library/svelte-persistable",
-  "version": "0.1.4",
-  "main": "dist/index.js",
+  "version": "0.1.5",
+  "main": "src/index.js",
   "repository": "git@github.com:svelte-library/svelte-persistable.git",
   "author": "Thomas Biesaart <thomas@infi.nl>",
   "license": "MIT",
   "scripts": {
-    "build": "tsc --outDir dist --declaration true && cp src/*.svelte dist/",
-    "dev": "rollup -c -w",
+    "build": "tsc",
     "validate": "svelte-check",
-    "prepublishOnly": "yarn build"
+    "prepublishOnly": "yarn build",
+    "test": "jest --useStderr --coverage",
+    "clean": "rimraf src/*.d.ts src/*.js*"
   },
   "files": [
-    "src",
-    "dist"
+    "src"
   ],
   "peerDependencies": {
     "svelte": "^3.29.0"
   },
   "devDependencies": {
-    "@rollup/plugin-node-resolve": "^9.0.0",
-    "@rollup/plugin-typescript": "^6.0.0",
+    "@babel/core": "^7.12.3",
+    "@babel/preset-env": "^7.12.1",
+    "@testing-library/jest-dom": "^5.11.4",
+    "@testing-library/svelte": "^3.0.0",
     "@tsconfig/svelte": "^1.0.10",
-    "rollup": "^2.32.1",
-    "rollup-plugin-filesize": "^9.0.2",
-    "rollup-plugin-svelte": "^6.1.0",
-    "rollup-plugin-terser": "^7.0.2",
+    "@types/jest": "^26.0.15",
+    "babel-jest": "^26.6.0",
+    "jest": "^26.6.0",
+    "jest-junit": "^12.0.0",
+    "jest-sonar-reporter": "^2.0.0",
     "svelte": "^3.29.0",
     "svelte-check": "^1.0.60",
+    "svelte-jester": "^1.1.5",
     "svelte-preprocess": "^4.5.1",
+    "ts-jest": "^26.4.1",
     "tslib": "^2.0.3",
     "typescript": "^4.0.3"
   },
   "keywords": [
     "svelte"
-  ]
+  ],
+  "jest": {
+    "testRegex": ".*\\.test\\.ts$",
+    "transform": {
+      "^.+\\.svelte$": [
+        "svelte-jester",
+        {
+          "preprocess": true
+        }
+      ],
+      "^.+\\.js$": "babel-jest",
+      "^.+\\.ts$": "ts-jest"
+    },
+    "moduleFileExtensions": [
+      "ts",
+      "svelte",
+      "js"
+    ],
+    "reporters": [
+      "default",
+      "jest-junit"
+    ],
+    "testResultsProcessor": "jest-sonar-reporter",
+    "coverageReporters": [
+      "lcov"
+    ],
+    "setupFilesAfterEnv": [
+      "@testing-library/jest-dom/extend-expect"
+    ]
+  }
 }

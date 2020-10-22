@@ -32,9 +32,9 @@ export function persistable<T>(defaultValue: () => NowOrLater<T>, config: Config
     store.subscribe((newValue) => {
         busy = busy.then(async () => {
             const serialized = await transform.serialize(newValue);
-            await localStorage.setItem(storageKey, serialized);
+            await storage.setItem(storageKey, serialized);
         });
-    })
+    });
 
     return {
         ...store,
