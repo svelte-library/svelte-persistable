@@ -124,12 +124,53 @@ By default this is `window.localStorage`.
 | <<transform>> (optional)
 | This implementation is used to (de)serialize the data before it is going to the <<storage>>
 and after it is coming from the <<storage>>.
-By default this is using https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/stringify[`JSON.stringify`] and https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/parse[`JSON.parse`].
+By default this is using https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/stringify[`JSON.stringify`^] and https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/parse[`JSON.parse`^].
 
 |===
 
 ==== Example
 
+.A minimal example
+[source,ts]
+----
+import {Config, persistable} from '@svelte-library/svelte-persistable';
+
+const storeConfig: Config = {
+    key: 'my-app/storeName'
+}
+
+export const store = persistable(() => 'init value', storeConfig);
+----
+
+.Using https://github.com/typestack/class-transformer[`class-transformer`^]
+[source,typescript]
+----
+import {classToPlain, plainToClass, Type} from 'class-transformer';
+import {Config} from '@svelte-library/svelte-persistable';
+
+export class MyStoreData {
+    title: string = "Hello World!";
+    @Type(() => Date)
+    someDateValue: Date;
+}
+
+const storeConfig: Config = {
+    key: 'my-app/store-data',
+    transform: {
+        deserialize(value: string): MyStoreData {
+            return plainToClass(MyStoreData, JSON.parse(value));
+        },
+        serialize(value: any): string {
+            return JSON.stringify(classToPlain(value));
+        }
+    }
+}
+
+
+export const store = persistable(() => new MyStoreData(), storeConfig);
+----
+
+[#gate]
 === `Gate` Component
 
 ==== Example
