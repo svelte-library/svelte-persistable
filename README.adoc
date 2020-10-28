@@ -1,8 +1,12 @@
-# Persisted Svelte Stores
+= Persisted Svelte Stores
+:toc:
+:!toc-placement:
 
 This package exposes a store which is persisted to storage and has typescript support.
 
-## Usage
+toc::[]
+
+== Usage
 
 Install the package:
 
@@ -16,11 +20,11 @@ npm install @svelte-library/svelte-persistable
 yarn add @svelte-library/svelte-persistable
 ```
 
-### 1. Define your store
+=== 1. Define your store
 
 `src/myStore.ts`
 ```typescript
-import {persistable, Config, JsonTransformer} from '@svelte-library/svelte-persistable'; 
+import {persistable, Config, JsonTransformer} from '@svelte-library/svelte-persistable';
 
 interface MyStore {
   message: string;
@@ -52,7 +56,7 @@ export const myStore = persistable<MyStore>(
 )
 ```
 
-### 2. Add a Gate to your app
+=== 2. Add a Gate to your app
 
 A gate prevents your app from starting until the persistable stores are done loading:
 
@@ -71,7 +75,7 @@ A gate prevents your app from starting until the persistable stores are done loa
 </Gate>
 ```
 
-### 3. Use the data from your store
+=== 3. Use the data from your store
 
 You can use your store just like any other [readable](https://svelte.dev/tutorial/readable-stores):
 
@@ -84,7 +88,7 @@ You can use your store just like any other [readable](https://svelte.dev/tutoria
 <p>Message: {$myStore.message}</p>
 ```
 
-### 4. Write to your store
+=== 4. Write to your store
 
 And finally, you can use your store just like any other [writable](https://svelte.dev/tutorial/writable-stores).
 
@@ -96,3 +100,15 @@ And finally, you can use your store just like any other [writable](https://svelt
 
 <input bind:value={$myStore.message}>
 ```
+
+== API
+
+=== `Config` object
+
+=== `Gate` Component
+
+=== `persistable` store
+
+=== `Storage` interface
+
+=== `Transform` interface
