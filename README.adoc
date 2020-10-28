@@ -103,7 +103,7 @@ And finally, you can use your store just like any other [writable](https://svelt
 
 === `Config` object
 
-This object contains the configuration of the <<_persistable_store>>.
+This object contains the configuration of the <<persistable>>.
 
 |===
 |Property |Type |Description
@@ -111,19 +111,19 @@ This object contains the configuration of the <<_persistable_store>>.
 | `key`
 | `string`
 | A key which is unique within your application.
-This key is used to store the data contained in the <<_persistable_store>>.
+This key is used to store the data contained in the <<persistable>>.
 
 | `storage`
-| <<_storage_interface>> (optional)
+| <<storage>> (optional)
 | This implementation is used to persist the data after it has changed,
 and to load the data when the app is loaded.
 This implementation may be asynchronous.
 By default this is `window.localStorage`.
 
 | `transform`
-| <<_transform_interface>> (optional)
-| This implementation is used to (de)serialize the data before it is going to the <<_storage_interface>>
-and after it is coming from the <<_storage_interface>>.
+| <<transform>> (optional)
+| This implementation is used to (de)serialize the data before it is going to the <<storage>>
+and after it is coming from the <<storage>>.
 By default this is using https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/stringify[`JSON.stringify`] and https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/parse[`JSON.parse`].
 
 |===
@@ -134,14 +134,17 @@ By default this is using https://developer.mozilla.org/en-US/docs/Web/JavaScript
 
 ==== Example
 
+[#persistable]
 === `persistable` store
 
 ==== Example
 
+[#storage]
 === `Storage` interface
 
 ==== Example
 
+[#transform]
 === `Transform` interface
 
 ==== Example
