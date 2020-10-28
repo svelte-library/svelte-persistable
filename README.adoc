@@ -10,20 +10,23 @@ toc::[]
 
 Install the package:
 
-**npm**
-```bash
+.npm
+[source,bash]
+----
 npm install @svelte-library/svelte-persistable
-```
+----
 
-**yarn**
-```bash
+.yarn
+[source,bash]
+----
 yarn add @svelte-library/svelte-persistable
-```
+----
 
 === 1. Define your store
 
-`src/myStore.ts`
-```typescript
+.`src/myStore.ts`
+[source,typescript]
+----
 import {persistable, Config, JsonTransformer} from '@svelte-library/svelte-persistable';
 
 interface MyStore {
@@ -40,28 +43,21 @@ const storageConfig: Config<MyStore> = {
   // this key must be unique within your app as it is used to
   // persist the state
   key: 'myApp/myStore',
-
-  // provide a storage.
-  // by default, this is the localStorage
-  storage: localStorage,
-
-  // provide a (de)serialization function
-  // be default, this is JSON.stringify/parse
-  transform: JsonTransformer,
 };
 
 export const myStore = persistable<MyStore>(
   getDefaultValue,
   storageConfig
 )
-```
+----
 
 === 2. Add a Gate to your app
 
 A gate prevents your app from starting until the persistable stores are done loading:
 
-`src/App.svelte`
-```sveltets
+.`src/App.svelte`
+[source,sveltets]
+----
 <script lang="ts">
   import {Gate} from '@svelte-library/svelte-persistable';
   import {MessageDisplay} from './MessageDisplay.svelte';
@@ -73,42 +69,79 @@ A gate prevents your app from starting until the persistable stores are done loa
   <MessageDisplay />
   <MessageInput />
 </Gate>
-```
+----
 
 === 3. Use the data from your store
 
 You can use your store just like any other [readable](https://svelte.dev/tutorial/readable-stores):
 
-`src/MessageDisplay.svelte`
-```sveltets
+.`src/MessageDisplay.svelte`
+[source,sveltets]
+----
 <script lang="ts">
   import {myStore} from './myStore';
 </script>
 
 <p>Message: {$myStore.message}</p>
-```
+----
 
 === 4. Write to your store
 
 And finally, you can use your store just like any other [writable](https://svelte.dev/tutorial/writable-stores).
 
-`src/MessageInput.svelte`
-```scveltets
+.`src/MessageInput.svelte`
+[source,scveltets]
+----
 <script lang="ts">
   import {myStore} from './myStore';
 </script>
 
 <input bind:value={$myStore.message}>
-```
+----
 
 == API
 
 === `Config` object
 
+This object contains the configuration of the <<_persistable_store>>.
+
+|===
+|Property |Type |Description
+
+| `key`
+| `string`
+| A key which is unique within your application.
+This key is used to store the data contained in the <<_persistable_store>>.
+
+| `storage`
+| <<_storage_interface>> (optional)
+| This implementation is used to persist the data after it has changed,
+and to load the data when the app is loaded.
+This implementation may be asynchronous.
+By default this is `window.localStorage`.
+
+| `transform`
+| <<_transform_interface>> (optional)
+| This implementation is used to (de)serialize the data before it is going to the <<_storage_interface>>
+and after it is coming from the <<_storage_interface>>.
+By default this is using https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/stringify[`JSON.stringify`] and https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/parse[`JSON.parse`].
+
+|===
+
+==== Example
+
 === `Gate` Component
+
+==== Example
 
 === `persistable` store
 
+==== Example
+
 === `Storage` interface
 
+==== Example
+
 === `Transform` interface
+
+==== Example
