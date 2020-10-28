@@ -27,7 +27,7 @@ yarn add @svelte-library/svelte-persistable
 .`src/myStore.ts`
 [source,typescript]
 ----
-import {persistable, Config, JsonTransformer} from '@svelte-library/svelte-persistable';
+import { persistable, Config } from '@svelte-library/svelte-persistable';
 
 interface MyStore {
   message: string;
@@ -51,7 +51,7 @@ export const myStore = persistable<MyStore>(
 )
 ----
 
-=== 2. Add a Gate to your app
+=== 2. Add a <<gate>> to your app
 
 A gate prevents your app from starting until the persistable stores are done loading:
 
@@ -128,9 +128,8 @@ By default this is using https://developer.mozilla.org/en-US/docs/Web/JavaScript
 
 |===
 
-==== Example
+==== Minimal example
 
-.A minimal example
 [source,ts]
 ----
 import {Config, persistable} from '@svelte-library/svelte-persistable';
@@ -142,7 +141,8 @@ const storeConfig: Config = {
 export const store = persistable(() => 'init value', storeConfig);
 ----
 
-.Using https://github.com/typestack/class-transformer[`class-transformer`^]
+==== Using https://github.com/typestack/class-transformer[`class-transformer`^]
+
 [source,typescript]
 ----
 import {classToPlain, plainToClass, Type} from 'class-transformer';
@@ -171,7 +171,7 @@ export const store = persistable(() => new MyStoreData(), storeConfig);
 ----
 
 [#gate]
-=== `Gate` Component
+=== `Gate` component
 
 ==== Example
 
